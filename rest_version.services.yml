@@ -1,0 +1,5 @@
+services:
+  # Plugin managers
+  plugin.manager.rest_version.version:
+    class: Drupal\rest_version\Plugin\RestVersionPluginManager
+    arguments: ['@container.namespaces', '@cache.discovery', '@module_handler']

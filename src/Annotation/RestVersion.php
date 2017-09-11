@@ -22,6 +22,6 @@ class RestVersion extends Plugin {
    *
    * @var string
    */
-  public $majorVersion;
+  public $machineName;
 
 }

@@ -1,0 +1,7 @@
+services:
+  rest_version_ui.route_subscriber:
+    class: Drupal\rest_version_ui\Routing\RouteSubscriber
+    arguments: ['@plugin.manager.rest_version.version']
+    tags:
+      - { name: event_subscriber }
+

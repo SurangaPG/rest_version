@@ -11,7 +11,7 @@ use Drupal\Core\Plugin\DefaultPluginManager;
  *
  * @see plugin_api
  */
-class VersionPluginManager extends DefaultPluginManager {
+class RestVersionPluginManager extends DefaultPluginManager {
 
   /**
    * Constructs a new \Drupal\rest\Plugin\Type\ResourcePluginManager object.
