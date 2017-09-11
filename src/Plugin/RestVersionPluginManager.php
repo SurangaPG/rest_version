@@ -25,7 +25,7 @@ class RestVersionPluginManager extends DefaultPluginManager {
    *   The module handler to invoke the alter hook with.
    */
   public function __construct(\Traversable $namespaces, CacheBackendInterface $cache_backend, ModuleHandlerInterface $module_handler) {
-    parent::__construct('Plugin/RestVersion/Version', $namespaces, $module_handler, 'Drupal\rest_version\Version\VersionInterface', 'Drupal\rest_version\Annotation\RestVersion');
+    parent::__construct('Plugin/RestVersion/Version', $namespaces, $module_handler, 'Drupal\rest_version\Version\RestVersionInterface', 'Drupal\rest_version\Annotation\RestVersion');
 
     $this->setCacheBackend($cache_backend, 'rest_version_version_plugins');
     $this->alterInfo('rest_version_version_plugins');
