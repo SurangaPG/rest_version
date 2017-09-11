@@ -1,0 +1,7 @@
+name: Rest - Version
+package: Rest
+description: "Provides functionality to version a rest api."
+type: module
+core: 8.x
+dependencies:
+- rest
