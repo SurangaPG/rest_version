@@ -1,0 +1,7 @@
+name: Rest - Version Example
+package: Rest
+description: "Provides examples to version a rest api. Mainly for development purposes, this will be removed in time."
+type: module
+core: 8.x
+dependencies:
+- rest_version

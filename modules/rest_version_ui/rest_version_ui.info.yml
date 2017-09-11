@@ -1,0 +1,8 @@
+name: Rest Version UI
+package: Rest
+description: "Provides alerations to the rest ui to support rest versions."
+type: module
+core: 8.x
+dependencies:
+- restui
+- rest_version
