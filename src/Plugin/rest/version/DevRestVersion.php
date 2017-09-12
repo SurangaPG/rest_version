@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\rest_version\Plugin\RestVersion;
+namespace Drupal\rest_version\Plugin\rest\version;
 
 /**
  * Special version that is always at the "head" of the current data model.

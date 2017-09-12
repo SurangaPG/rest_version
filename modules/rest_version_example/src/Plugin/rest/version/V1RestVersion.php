@@ -1,8 +1,8 @@
 <?php
 
-namespace Drupal\rest_version_example\Plugin\RestVersion;
+namespace Drupal\rest_version_example\Plugin\rest\version;
 
-use Drupal\rest_version\Plugin\RestVersion\RestVersionBase;
+use Drupal\rest_version\Plugin\rest\version\RestVersionBase;
 
 /**
  * Example v1 for the api (currently used for dev purposes).
