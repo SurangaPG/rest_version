@@ -1,0 +1,7 @@
+# This is a basic overview page for a rest version plugin.
+rest_version_ui.version.canonical:
+  path: '/admin/config/services/rest/version/{version_id}/view'
+  defaults:
+    _controller: '\Drupal\rest_version_ui\Controller\RestVersionUIController::viewVersion'
+  requirements:
+    _permission: 'administer rest resources'
