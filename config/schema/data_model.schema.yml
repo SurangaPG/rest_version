@@ -1,0 +1,12 @@
+rest_version.data_model.*:
+  type: config_entity
+  label: 'Data model config'
+  mapping:
+    id:
+      type: string
+      label: 'ID'
+    label:
+      type: label
+      label: 'Label'
+    uuid:
+      type: string

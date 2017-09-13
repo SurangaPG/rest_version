@@ -6,10 +6,5 @@ services:
 
   # Plugin managers
   plugin.manager.rest_version.version:
-    class: Drupal\rest_version\Plugin\RestVersionPluginManager
+    class: Drupal\rest_version\Manager\Version\VersionPluginManager
     arguments: ['@container.namespaces', '@cache.discovery', '@module_handler']
-
-  # Repositories
-  repository.rest_version.resource:
-    class: Drupal\rest_version\Repository\RestResourceRepository
-    arguments: ['@entity_type.manager', '@factory.plugin.manager.rest_version.resource']

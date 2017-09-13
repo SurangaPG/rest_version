@@ -2,7 +2,6 @@
 
 namespace Drupal\rest_version\Manager\Resource;
 
-use Drupal\Component\Plugin\PluginManagerInterface;
 use Drupal\rest\Plugin\Type\ResourcePluginManager;
 
 /**

@@ -30,7 +30,7 @@ class DefaultResourcePluginManager extends DefaultPluginManager implements Resou
     public function __construct(\Traversable $namespaces, CacheBackendInterface $cacheBackend, ModuleHandlerInterface $moduleHandler, $versionDefinition) {
 
         // Account for possible leading/trailing slashes.
-        $pluginNamespace = 'Plugin/rest/resource/' . trim($versionDefinition['pluginNameSpace'], '/');
+        $pluginNamespace = 'Plugin/rest/resource/' . trim($versionDefinition['namespace'], '/');
 
         parent::__construct($pluginNamespace, $namespaces, $moduleHandler, 'Drupal\rest\Plugin\ResourceInterface', 'Drupal\rest\Annotation\RestResource');
 

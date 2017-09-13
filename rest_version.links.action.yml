@@ -1,0 +1,13 @@
+entity.data_model.add_form:
+  route_name: entity.data_model.add_form
+  title: 'Add Data model'
+  appears_on:
+    - entity.data_model.collection
+
+entity.rest_version.add_form:
+  route_name: entity.rest_version.add_form
+  title: 'Add Rest version'
+  appears_on:
+    - entity.rest_version.collection
+    - restui.list
+

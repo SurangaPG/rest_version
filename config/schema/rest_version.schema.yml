@@ -1,0 +1,15 @@
+rest_version.rest_version.*:
+  type: config_entity
+  label: 'Rest version config'
+  mapping:
+    id:
+      type: string
+      label: 'ID'
+    label:
+      type: label
+      label: 'Label'
+    uuid:
+      type: string
+    namespace:
+      type: string
+      label: 'Namespace'

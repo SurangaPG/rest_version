@@ -8,7 +8,7 @@ use Drupal\rest\Plugin\Type\ResourcePluginManager;
 use Drupal\rest_version\Manager\Resource\DefaultResourcePluginManager;
 use Drupal\rest_version\Manager\Resource\ResourcePluginManagerInterface;
 use Drupal\rest_version\Manager\Resource\WrapperResourcePluginManager;
-use Drupal\rest_version\Plugin\RestVersionPluginManager;
+use Drupal\rest_version\Manager\Version\VersionPluginManager;
 
 /**
  * Factory for the service that generates the actual resourcePluginManagers.
@@ -49,7 +49,7 @@ class ResourcePluginManagerFactory implements ResourcePluginManagerFactoryInterf
     protected $resourcePluginManager;
 
     /**
-     * @var \Drupal\rest_version\Plugin\RestVersionPluginManager
+     * @var \Drupal\rest_version\Manager\Version\VersionPluginManager
      *   The version plugin manager.
      */
     protected $restVersionPluginManager;
@@ -73,7 +73,7 @@ class ResourcePluginManagerFactory implements ResourcePluginManagerFactoryInterf
      *   The module handler to invoke the alter hook with.
      * @param \Drupal\rest\Plugin\Type\ResourcePluginManager $resourcePluginManager
      *   The core rest resourcePluginManager.
-     * @param \Drupal\rest_version\Plugin\RestVersionPluginManager $restVersionPluginManager
+     * @param \Drupal\rest_version\Manager\Version\VersionPluginManager $restVersionPluginManager
      *   The rest version plugin manager.
      */
     public function __construct(
@@ -81,7 +81,7 @@ class ResourcePluginManagerFactory implements ResourcePluginManagerFactoryInterf
         CacheBackendInterface $cacheBackend,
         ModuleHandlerInterface $moduleHandler,
         ResourcePluginManager $resourcePluginManager,
-        RestVersionPluginManager $restVersionPluginManager
+        VersionPluginManager $restVersionPluginManager
     ) {
         $this->namespaces = $namespaces;
         $this->cacheBackend = $cacheBackend;

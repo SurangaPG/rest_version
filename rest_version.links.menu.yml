@@ -1,0 +1,18 @@
+
+# Data model menu items definition
+entity.data_model.collection:
+  title: 'Data model'
+  route_name: entity.data_model.collection
+  description: 'List Data model (bundles)'
+  parent: system.admin_structure
+  weight: 99
+
+
+# Rest version menu items definition
+entity.rest_version.collection:
+  title: 'Rest version'
+  route_name: entity.rest_version.collection
+  description: 'List Rest version (bundles)'
+  parent: system.admin_structure
+  weight: 99
+

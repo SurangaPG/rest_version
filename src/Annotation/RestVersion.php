@@ -16,12 +16,10 @@ use \Drupal\Component\Annotation\Plugin;
 class RestVersion extends Plugin {
 
   /**
-   * The Major version number.
-   *
-   * Usually in the form "v0", "v1" etc.
+   * The namespace to look for plugins for.
    *
    * @var string
    */
-  public $pluginNameSpace;
+  public $namespace;
 
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\rest_version\Plugin;
+namespace Drupal\rest_version\Manager\Version;
 
 use Drupal\Core\Cache\CacheBackendInterface;
 use Drupal\Core\Extension\ModuleHandlerInterface;
@@ -11,7 +11,7 @@ use Drupal\Core\Plugin\DefaultPluginManager;
  *
  * @see plugin_api
  */
-class RestVersionPluginManager extends DefaultPluginManager {
+class VersionPluginManager extends DefaultPluginManager {
 
   /**
    * Constructs a new \Drupal\rest\Plugin\Type\ResourcePluginManager object.
@@ -30,5 +30,4 @@ class RestVersionPluginManager extends DefaultPluginManager {
     $this->setCacheBackend($cache_backend, 'rest_version_version_plugins');
     $this->alterInfo('rest_version_version_plugins');
   }
-
 }
