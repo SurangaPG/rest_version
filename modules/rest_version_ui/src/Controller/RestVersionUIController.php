@@ -5,6 +5,7 @@ namespace Drupal\rest_version_ui\Controller;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Url;
 use Drupal\rest_version\Plugin\RestVersionPluginManager;
+use Drupal\rest_version\RestResourceRepositoryInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
@@ -32,12 +33,18 @@ class RestVersionUIController extends ControllerBase {
   protected $urlGenerator;
 
   /**
+   * @var \Drupal\rest_version\RestResourceRepositoryInterface
+   */
+  protected $restResourceRepository;
+
+  /**
    * Injects RestUIManager Service.
    */
   public static function create(ContainerInterface $container) {
     return new static(
       $container->get('plugin.manager.rest_version.version'),
-      $container->get('url_generator')
+      $container->get('url_generator'),
+      $container->get('repository.rest_version.resource')
     );
   }
 
@@ -48,10 +55,13 @@ class RestVersionUIController extends ControllerBase {
    *   The REST resource plugin manager.
    * @param \Symfony\Component\Routing\Generator\UrlGeneratorInterface $urlGenerator
    *   The url generator to use.
+   * @param \Drupal\rest_version\RestResourceRepositoryInterface $restResourceRepository
+   *   The rest resource repository.
    */
-  public function __construct(RestVersionPluginManager $restVersionPluginManager, UrlGeneratorInterface $urlGenerator) {
+  public function __construct(RestVersionPluginManager $restVersionPluginManager, UrlGeneratorInterface $urlGenerator, RestResourceRepositoryInterface $restResourceRepository) {
     $this->restVersionPluginManager = $restVersionPluginManager;
     $this->urlGenerator = $urlGenerator;
+    $this->restResourceRepository = $restResourceRepository;
   }
 
   /**
@@ -64,20 +74,20 @@ class RestVersionUIController extends ControllerBase {
     // @TODO Move this to a proper listbuilding class.
     $build['version_list'] = [
       '#type' => 'table',
-      '#header' => [t('Label'), t('Machine name'), t('Operations')]
+      '#header' => [t('Label'), t('Id'), t('Operations')]
     ];
 
     foreach ($this->restVersionPluginManager->getDefinitions() as $definition) {
       $build['version_list']['#rows'][]['data'] = [
         $definition['label'],
-        $definition['machineName'],
+        $definition['id'],
         'operations' => [
           'data' => [
             '#type' => 'operations',
             '#links' => [
               'enable' => [
                 'title' => $this->t('View'),
-                'url' => Url::fromRoute('rest_version_ui.version.canonical', ['version_id' => $definition['machineName']]),
+                'url' => Url::fromRoute('rest_version_ui.version.canonical', ['version_id' => $definition['id']]),
               ],
             ],
           ]
@@ -89,10 +99,27 @@ class RestVersionUIController extends ControllerBase {
   }
 
   /**
-   * Displays a single version for of the rest api.
+   * @param string $version_id
+   *
+   * @return array
    */
-  public function viewVersion() {
-    return [];
+  public function viewVersion($version_id) {
+
+    $build = [];
+
+    $build['endpoint_list'] = [
+        '#type' => 'table',
+        '#header' => [t('id'), t('label')]
+    ];
+
+    foreach ($this->restResourceRepository->getDefinitions($version_id) as $definition) {
+      $build['endpoint_list']['#rows'][] = [
+        $definition['id'],
+        $definition['label'],
+      ];
+    }
+
+    return $build;
   }
 
 }

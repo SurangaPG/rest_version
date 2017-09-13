@@ -12,7 +12,7 @@ use Drupal\rest_version\Plugin\rest\version\RestVersionBase;
  * @RestVersion(
  *   id = "v0",
  *   label = "Version 0",
- *   machineName = "v0",
+*    pluginNameSpace = "V0",
  * )
  */
 class V0RestVersionBase extends RestVersionBase {

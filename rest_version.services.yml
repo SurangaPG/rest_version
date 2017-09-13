@@ -1,5 +1,15 @@
 services:
+  # Factories.
+  factory.plugin.manager.rest_version.resource:
+    class: Drupal\rest_version\Factory\ResourcePluginManagerFactory
+    arguments: ['@container.namespaces', '@cache.discovery', '@module_handler', '@plugin.manager.rest', '@plugin.manager.rest_version.version']
+
   # Plugin managers
   plugin.manager.rest_version.version:
     class: Drupal\rest_version\Plugin\RestVersionPluginManager
     arguments: ['@container.namespaces', '@cache.discovery', '@module_handler']
+
+  # Repositories
+  repository.rest_version.resource:
+    class: Drupal\rest_version\Repository\RestResourceRepository
+    arguments: ['@entity_type.manager', '@factory.plugin.manager.rest_version.resource']
