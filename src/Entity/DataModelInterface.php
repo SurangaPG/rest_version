@@ -9,5 +9,14 @@ use Drupal\Core\Config\Entity\ConfigEntityInterface;
  */
 interface DataModelInterface extends ConfigEntityInterface {
 
-  // Add get/set methods for your configuration properties here.
+  /**
+   * @return array
+   */
+  public function getFields();
+
+  /**
+   * @param array $fields
+   */
+  public function setFields($fields);
+
 }

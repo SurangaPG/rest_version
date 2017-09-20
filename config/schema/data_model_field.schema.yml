@@ -1,6 +1,6 @@
-rest_version.data_model.*:
+rest_version.data_model_field.*:
   type: config_entity
-  label: 'Data model config'
+  label: 'Data model field config'
   mapping:
     id:
       type: string
@@ -10,5 +10,5 @@ rest_version.data_model.*:
       label: 'Label'
     uuid:
       type: string
-    fields:
+    field_config:
       type: mapping

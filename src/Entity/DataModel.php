@@ -54,4 +54,24 @@ class DataModel extends ConfigEntityBase implements DataModelInterface {
    */
   protected $label;
 
+  /**
+   * Array with all the locked in field id's
+   *
+   * @var array
+   */
+  protected $fields = [];
+
+  /**
+   * @return array
+   */
+  public function getFields() {
+    return $this->fields;
+  }
+
+  /**
+   * @param array $fields
+   */
+  public function setFields($fields) {
+    $this->fields = $fields;
+  }
 }

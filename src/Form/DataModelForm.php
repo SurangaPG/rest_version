@@ -4,6 +4,8 @@ namespace Drupal\rest_version\Form;
 
 use Drupal\Core\Entity\EntityForm;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\rest_version\Entity\DataModelField;
+use Drupal\rest_version\Entity\DataModelInterface;
 
 /**
  * Class DataModelForm.
@@ -36,6 +38,26 @@ class DataModelForm extends EntityForm {
     ];
 
     /* You will need additional form elements for your custom properties. */
+    // Add a sneaky testy implementation for the idea of saving entity field data.
+    $entityTypeId = 'node';
+    $entityBundle = 'page';
+
+    // Get the fields on the bundle.
+    $storage = $this->entityTypeManager->getStorage('field_config');
+    $fields = $storage->loadByProperties(['entity_type' => $entityTypeId, 'bundle' => $entityBundle]);
+
+    $form['fields']['#tree'] = TRUE;
+    $form['fields'] = [
+      '#type' => 'checkboxes',
+      '#title' => t('Locked in fields'),
+      '#options' => [],
+      '#default_value' => $data_model->getFields(),
+    ];
+
+    // Add checkboxes to allow locking in the various fields.
+    foreach ($fields as $fieldConfig) {
+      $form['fields']['#options'][$fieldConfig->id()] = $fieldConfig->label();
+    }
 
     return $form;
   }
@@ -44,7 +66,38 @@ class DataModelForm extends EntityForm {
    * {@inheritdoc}
    */
   public function save(array $form, FormStateInterface $form_state) {
+    /** @var DataModelInterface $data_model */
     $data_model = $this->entity;
+
+    // Clean up the fields array to something a bit more usable.
+    // Basically makes into a "straight" array of field identifiers.
+    $fields = $data_model->getFields();
+    $fields = array_filter($fields);
+    $fields = array_keys($fields);
+    $data_model->setFields($fields);
+
+    // Generate a list of the updated field config for the data model.
+    // @TODO account for the removing/updating of a data model.
+    $storage = $this->entityTypeManager->getStorage('field_config');
+
+    foreach($data_model->getFields() as $field) {
+      $field = $storage->load($field);
+
+      // @TODO Handle dependencies better by using the core config system (needs field etc).
+      // @TODO Relying on the field as a dependency might not be enough since it's own dependencies might change.
+      $fieldConfig = \Drupal::configFactory()->get('field.field.' . $field->id())->get();
+
+      $dataModelFieldValues = [
+        'id' => $data_model->id() . '.' . $field->id(),
+        'label' => $field->label(),
+        'field_config' => $fieldConfig,
+      ];
+
+      $dataModelField = DataModelField::create($dataModelFieldValues);
+      $dataModelField->save();
+    }
+
+
     $status = $data_model->save();
 
     switch ($status) {

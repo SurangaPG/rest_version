@@ -11,3 +11,9 @@ entity.rest_version.add_form:
     - entity.rest_version.collection
     - restui.list
 
+entity.data_model_field.add_form:
+  route_name: entity.data_model_field.add_form
+  title: 'Add Data model field'
+  appears_on:
+    - entity.data_model_field.collection
+

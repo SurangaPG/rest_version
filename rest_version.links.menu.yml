@@ -16,3 +16,12 @@ entity.rest_version.collection:
   parent: system.admin_structure
   weight: 99
 
+
+# Data model field menu items definition
+entity.data_model_field.collection:
+  title: 'Data model field'
+  route_name: entity.data_model_field.collection
+  description: 'List Data model field (bundles)'
+  parent: system.admin_structure
+  weight: 99
+
