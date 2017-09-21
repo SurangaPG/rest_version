@@ -9,8 +9,9 @@ namespace Drupal\rest_version\Plugin\rest\version;
  *   id = "dev",
  *   label = "Development",
  *   machineName = "dev",
+ *   prefix = "",
  * )
  */
-class DevRestVersionBase extends RestVersionBase {
+class DevRestVersionBase extends VersionBase {
 
 }

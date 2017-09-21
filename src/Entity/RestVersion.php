@@ -62,9 +62,23 @@ class RestVersion extends ConfigEntityBase implements RestVersionInterface {
   protected $namespace;
 
   /**
+   * The prefix for this item.
+   *
+   * @var string
+   */
+  protected $prefix;
+
+  /**
    * @inheritdoc
    */
   public function getNamespace() {
     return $this->namespace;
+  }
+
+  /**
+   * @inheritdoc
+   */
+  public function getPrefix() {
+    return $this->prefix;
   }
 }

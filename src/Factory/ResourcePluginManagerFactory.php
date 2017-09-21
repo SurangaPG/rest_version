@@ -121,7 +121,6 @@ class ResourcePluginManagerFactory implements ResourcePluginManagerFactoryInterf
         if ($this->restVersionPluginManager->hasDefinition($versionId)) {
 
             $definition = $this->restVersionPluginManager->getDefinition($versionId);
-
             return new DefaultResourcePluginManager($this->namespaces, $this->cacheBackend, $this->moduleHandler, $definition);
         }
 

@@ -22,4 +22,10 @@ class RestVersion extends Plugin {
    */
   public $namespace;
 
+  /**
+   * The prefix to add to all the endpoints.
+   *
+   * @var string
+   */
+  public $prefix;
 }

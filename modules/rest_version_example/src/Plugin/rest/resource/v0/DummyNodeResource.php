@@ -1,8 +1,9 @@
 <?php
 
 namespace Drupal\rest_version_example\Plugin\rest\resource\v0;
-use Drupal\rest\Plugin\ResourceBase;
+
 use Drupal\rest\ResourceResponse;
+use Drupal\rest_version\Plugin\VersionedResourceBase;
 
 /**
  * Represents entities as resources.
@@ -11,11 +12,12 @@ use Drupal\rest\ResourceResponse;
  *   id = "v0:node",
  *   label = @Translation("V0 resource"),
  *   uri_paths = {
- *     "canonical" = "/v0/node/{node}",
- *   }
+ *     "canonical" = "/node/{node}",
+ *   },
+ *   majorVersion = "v0",
  * )
  */
-class DummyNodeResource extends ResourceBase {
+class DummyNodeResource extends VersionedResourceBase {
 
   /**
    * @return \Drupal\rest\ResourceResponse
