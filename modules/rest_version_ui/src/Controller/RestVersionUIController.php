@@ -7,6 +7,7 @@ use Drupal\Core\Entity\EntityStorageInterface;
 use Drupal\Core\Url;
 use Drupal\rest_version\Factory\ResourcePluginManagerFactoryInterface;
 use Drupal\rest_version\Manager\Version\VersionPluginManager;
+use Drupal\rest_version\Plugin\rest\version\VersionInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
@@ -124,6 +125,9 @@ class RestVersionUIController extends ControllerBase {
         '#header' => [t('id'), t('label')]
     ];
 
+    /** @var VersionInterface $majorVersion */
+    $majorVersion = $this->restVersionPluginManager->createInstance($version_id);
+
     // Following code is largely a copy of the contrib rest UI module to get things started.
 
     // Get the list of enabled and disabled resources.
@@ -192,7 +196,7 @@ class RestVersionUIController extends ControllerBase {
       ];
       foreach ($available_resources[$status] as $id => $resource) {
         $canonical_uri_path = !empty($resource['uri_paths']['canonical'])
-          ? $resource['uri_paths']['canonical']
+          ? $majorVersion->prefixPath($resource['uri_paths']['canonical'])
           : FALSE;
 
         // @see https://www.drupal.org/node/2737401

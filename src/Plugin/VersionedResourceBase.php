@@ -3,7 +3,7 @@
 namespace Drupal\rest_version\Plugin;
 
 use Drupal\rest\Plugin\ResourceBase;
-use Drupal\rest_version\Entity\RestVersionInterface;
+use Drupal\rest_version\Plugin\rest\version\VersionInterface;
 
 class VersionedResourceBase extends ResourceBase {
 
@@ -25,11 +25,13 @@ class VersionedResourceBase extends ResourceBase {
     // @TODO Inject this instead of using the global drupal object.
     $majorVersion = $this->getPluginDefinition()['majorVersion'];
 
-    if (isset($majorVersion) && $majorVersion != 'dev') {
-      /** @var RestVersionInterface $versionDefinition */
-      $versionDefinition = \Drupal::service('plugin.manager.rest_version.version')->createInstance($majorVersion);
-      $route->setPath($versionDefinition->getPrefix() . $route->getPath());
-    }
+    // Backwards compatibility with the core rest items.
+    // If no version is specified the "dev" version is used which is a dummy.
+    $majorVersion = isset($majorVersion) ? $majorVersion : 'dev';
+
+    /** @var VersionInterface $versionDefinition */
+    $versionDefinition = \Drupal::service('plugin.manager.rest_version.version')->createInstance($majorVersion);
+    $versionDefinition->alterRoute($route);
 
     return $route;
   }
